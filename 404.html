@@ -7,6 +7,15 @@
   <meta name="Author" content="aspku">
  </head>
  <style type="text/css">
+ .btn-audio{
+	position:fixed;
+	z-index:999; top:0;
+	margin:10px 0px 0px 10px;
+	width: 32px;
+	height: 32px;
+	background:url(image/stop.png) no-repeat center bottom;
+	background-size:cover;
+}
 .me404 {
 width: 1000px;
 height: 480px;
@@ -199,5 +208,28 @@ C445.1,269.6,446.4,268.3,448.1,268.3z" />
 </g>
 </g>
 </svg>
+<div class="btn-audio"><audio id="mp3Btn" autoplay="autoplay"><source src="music/lz.mp3" type="audio/mpeg"  /></audio></div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+$(function(){
+	//播放完毕
+	$('#mp3Btn').on('ended', function() {
+		console.log("音频已播放完成");
+		$('.btn-audio').css({'background':'url(image/play.png) no-repeat center bottom','background-size':'cover'});
+	})
+	//播放器控制
+	var audio = document.getElementById('mp3Btn');
+	$('.btn-audio').click(function() {
+		if(audio.paused){ //如果当前是暂停状态
+			$('.btn-audio').css({'background':'url(image/stop.png) no-repeat center bottom','background-size':'cover'});
+			audio.play(); //播放
+			return;
+		}else{//当前是播放状态
+			$('.btn-audio').css({'background':'url(image/play.png) no-repeat center bottom','background-size':'cover'});
+			audio.pause(); //暂停
+		}
+	});
+});	
+</script>
  </body>
 </html>
